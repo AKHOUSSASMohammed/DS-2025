@@ -222,8 +222,6 @@ axes[0, 0].set_title('Distribution des valeurs', fontsize=14, fontweight='bold')
 axes[0, 0].set_xlabel('Valeur')
 axes[0, 0].set_ylabel('Fréquence')
 
-<img src="download.png" style="height:464px;margin-right:432px"/>
-
 # Ajouter la moyenne et la médiane
 axes[0, 0].axvline(colonne.mean(), color='red', linestyle='--', 
                    label=f'Moyenne: {colonne.mean():.2f}')
@@ -249,7 +247,7 @@ axes[1, 1].set_title('Q-Q Plot (Test de normalité)', fontsize=14, fontweight='b
 plt.tight_layout()
 plt.show()
 ```
-
+<img src="download.png" style="height:464px;margin-right:432px"/>
 ### 2.3 Statistiques Inférentielles
 
 Les statistiques inférentielles permettent de faire des inférences sur une population à partir d'un échantillon.
