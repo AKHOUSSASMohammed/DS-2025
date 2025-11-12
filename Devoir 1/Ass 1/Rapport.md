@@ -1,7 +1,9 @@
 1- Profil :
+<img src="IMG-20250509-WA0029.jpg" style="height:464px;margin-right:432px"/>
 
+2- Thème :
 
-
+Étude de prédiction des revenus annuels 
 
 3-Description du Base de Données qui sera utilisée :
 Ce rapport présente une étude approfondie de la prédiction des revenus annuels, en se concentrant sur la classification binaire visant à déterminer si le revenu d'un individu dépasse ou non 50 000 dollars par an. En exploitant le jeu de données "Adult" (également connu sous le nom de "Census Income" dataset), collecté par Barry Becker de la Silicon Graphics et initialement analysé par Ronny Kohavi, et provenant de l'UCI Machine Learning Repository, cette analyse explorera les caractéristiques démographiques et socio-économiques clés qui influencent cette prédiction. Nous détaillerons les étapes de prétraitement des données, la sélection des caractéristiques pertinentes et l'application de divers modèles d'apprentissage automatique. L'objectif est d'identifier le modèle le plus performant pour prédire avec précision les niveaux de revenu, en fournissant des insights précieux sur les facteurs déterminants de la richesse au sein de la population étudiée.
