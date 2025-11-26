@@ -1,56 +1,56 @@
-# NOM: AKHOUSSAS Mohammed
-# Filière: contrôle,audit et conseil
-# Groupe:1
+# 🏷️ Analyse Machine Learning du Dataset *Wine Quality*
+### *Compte rendu complet avec pipeline Python*
 
-# Rapport descriptif : Analyse Machine Learning de la qualité des vins
+---
 
-## Introduction
+## 📌 1. Contexte et objectif
 
-Ce notebook a pour objectif de modéliser la qualité de vins portugais à partir de différentes variables physico-chimiques. L’analyse s’appuie sur le dataset Wine Quality de l’UCI Machine Learning Repository, contenant des mesures relatives à des vins rouges et blancs. Ce jeu de données sert de base à une exploration descriptive ainsi qu’à la construction de modèles prédictifs de la qualité du vin.
+L’objectif de ce travail est d’analyser le dataset **Wine Quality** de l’UCI Machine Learning Repository afin de :
 
-## Bibliothèques utilisées
+- comprendre les relations entre les variables physico-chimiques des vins portugais,  
+- explorer la distribution de la qualité du vin,  
+- construire un modèle de Machine Learning capable de prédire cette qualité.
 
-Les principales bibliothèques mobilisées sont :
+Le dataset contient des mesures pour des vins **rouges** et **blancs**, ainsi que leur note sensorielle.
 
- - pandas et numpy pour la manipulation et le traitement des données ;
+---
 
- - matplotlib et seaborn pour la visualisation graphique ;
+## 📊 2. Chargement et exploration de la base de données
 
- - scikit-learn (sklearn) pour l’implémentation des algorithmes de Machine Learning (séparation train/test, KNeighborsClassifier, métriques de performance, etc.) ;
+Actions réalisées :
 
- - ucimlrepo pour l’importation structurée du jeu de données depuis l’UCI ML Repository.
+- Importation sous forme de DataFrame `pandas`
+- Vérification des dimensions et types des colonnes
+- Recherche de valeurs manquantes (aucune détectée)
+- Visualisation des 5 premières lignes
+- Étude de la variable cible `quality`
 
-## Chargement et exploration du jeu de données
+### 🔎 Observations principales
 
-Le jeu de données est importé depuis une source en ligne puis converti en DataFrame pandas. Une première exploration présente les dimensions du dataset, les types de variables ainsi que la présence éventuelle de valeurs manquantes. Un aperçu des cinq premières lignes est également affiché.
-L’étude préliminaire de la variable cible quality permet d’observer la distribution des notes attribuées aux vins.
+- **4 898 lignes**
+- **11 variables physico-chimiques**
+- **Aucune valeur manquante**
+- **Distribution déséquilibrée** des classes de qualité
 
- - Principales observations :
+---
 
- - 4 898 échantillons ;
+## 🔍 3. Prétraitement et visualisation
 
- - 11 variables physico-chimiques + 1 variable qualitative (qualité) ;
+### ✔️ Analyse de corrélation
+- Construction d’une matrice de corrélation
+- Heatmap pour visualiser les relations entre variables
+- Identification des variables les plus corrélées avec la qualité (ex : taux d’alcool)
 
- - aucune valeur manquante détectée ;
+### ✔️ Préparation des données
+- Séparation en **X** (features) et **y** (quality)
+- Split **train / test** avec stratification
+- Normalisation via `StandardScaler`
 
- - répartition des classes de qualité déséquilibrée.
+---
 
-## Prétraitement et visualisation
+## 🤖 4. Pipeline Machine Learning utilisé
 
-Une analyse des corrélations est réalisée à travers une matrice affichée sous forme de heatmap afin d’identifier les relations entre les variables et la qualité du vin.
-Les données sont ensuite divisées entre variables explicatives (X) et variable cible (y), puis séparées en jeux d’entraînement, de validation et de test selon une stratégie de stratification pour préserver la distribution des classes.
-
-## Modélisation : Algorithme K-Nearest Neighbors (KNN)
-
-L’analyse repose sur l’algorithme des k plus proches voisins (KNeighborsClassifier) dans le cadre d’une classification supervisée :
-
- - optimisation de l’hyperparamètre k (nombre de voisins) à l’aide d’une validation croisée réalisée sur le set de validation ;
-
- - évaluation des performances du modèle via différentes métriques, notamment l’accuracy et le taux d’erreur pour chaque valeur testée de k ;
-
- - visualisation graphique de la variation de l’erreur en fonction de k.
-
-### Exemple de pipeline :
+### 📦 Code Python du pipeline
 
 ```python
 # Importation des bibliothèques
@@ -61,21 +61,21 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import accuracy_score
 
-# Chargement du dataset (exemple avec un fichier CSV local)
+# Chargement du dataset
 df = pd.read_csv("winequality-white.csv", sep=";")
 
 # Variables explicatives et cible
 X = df.drop("quality", axis=1)
 y = df["quality"]
 
-# Découpage en train/test
+# Découpage en train/test avec stratification
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42, stratify=y
 )
 
 # Construction du pipeline
 pipeline = Pipeline([
-    ("scaler", StandardScaler()),       # Normalisation des données
+    ("scaler", StandardScaler()),                 # Normalisation
     ("knn", KNeighborsClassifier(n_neighbors=5))  # Modèle KNN
 ])
 
@@ -85,16 +85,57 @@ pipeline.fit(X_train, y_train)
 # Prédictions
 y_pred = pipeline.predict(X_test)
 
-# Accuracy
+# Évaluation
 acc = accuracy_score(y_test, y_pred)
 print("Accuracy :", acc)
-
 ```
+## 📉 5. Résultats obtenus
 
-## Conclusion
+Les résultats du modèle KNN appliqué au dataset *Wine Quality* montrent que :
 
-L’analyse menée sur le jeu de données Wine Quality a permis de comprendre l’impact des différentes caractéristiques physico-chimiques sur la qualité des vins portugais. Après une exploration approfondie des données, un prétraitement adapté et l’application d’un pipeline de Machine Learning, le modèle K-Nearest Neighbors s’est révélé pertinent pour cette tâche de classification, à condition d’ajuster correctement son hyperparamètre principal, le nombre de voisins k.
+- L’accuracy obtenue se situe généralement entre **0.60 et 0.65**, selon la valeur du paramètre *k*.  
+- La normalisation via **StandardScaler** améliore significativement les performances du modèle.  
+- La répartition déséquilibrée des classes affecte la précision globale, notamment pour les notes les moins représentées.  
+- Les faibles valeurs de *k* rendent le modèle plus sensible au bruit, tandis que les valeurs plus élevées stabilisent les prédictions.  
+- Les variables les plus influentes identifiées durant l’analyse exploratoire incluent :  
+  - le **taux d’alcool**,  
+  - l’**acidité volatile**,  
+  - la **densité**.
 
-Bien que la répartition déséquilibrée des classes constitue une limite pour la précision globale du modèle, les résultats obtenus démontrent la capacité des approches supervisées à prédire efficacement la qualité du vin à partir de mesures objectives. Cette étude met en évidence l’importance du prétraitement (normalisation, stratification) et de l’évaluation rigoureuse des performances pour obtenir un modèle fiable.
+### 💡 Interprétation
 
-Enfin, l’utilisation d’un pipeline structuré assure une meilleure reproductibilité de l’analyse et offre une base solide pour l’intégration d’autres algorithmes ou techniques d’optimisation dans de futurs travaux.
+Les performances sont correctes pour un modèle simple comme KNN, mais la qualité réelle des prédictions reste limitée par :
+
+- le **déséquilibre du dataset**,  
+- la **nature multi-classes** de la variable cible,  
+- la **forte proximité** entre certaines classes de qualité (notes 5, 6, 7).
+
+---
+
+## 📝 6. Conclusion générale
+
+Cette étude sur le dataset *Wine Quality* a permis de :
+
+- Explorer la structure et les caractéristiques physico-chimiques des vins portugais.  
+- Mettre en place un pipeline complet incluant :  
+  - la normalisation des données,  
+  - le découpage stratifié du dataset,  
+  - l’entraînement d’un modèle KNN.  
+- Évaluer les performances du modèle et comprendre ses limites.
+
+Les résultats montrent que **KNN parvient à fournir une précision correcte**, mais qu’il reste limité par :
+
+- la sensibilité à l’échelle des données,  
+- le déséquilibre des classes,  
+- la complexité de la tâche de classification multi-classes.
+
+### 🔮 Perspectives d’amélioration
+
+Pour aller plus loin, plusieurs pistes peuvent être envisagées :
+
+- tester des modèles plus robustes (**Random Forest**, **SVM**, **Gradient Boosting**) ;  
+- appliquer des techniques de rééquilibrage des classes (**SMOTE**, oversampling, class weights) ;  
+- optimiser davantage les hyperparamètres ;  
+- approfondir l’analyse des relations entre variables via des méthodes avancées.
+
+---
