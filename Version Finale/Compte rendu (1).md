@@ -2,6 +2,9 @@
 
 ![Image](https://raw.githubusercontent.com/AKHOUSSASMohammed/DS-2025/4cf334f2a4952eea59150946e5327983ef082b0f/Version%20Finale/IMG-20250509-WA0026.jpg)
 
+> **À propos de moi**  
+> Étudiant en cycle de Gestion à l’ENCG, orienté vers le contrôle de gestion et la finance d’entreprise. Intéressé par l’analyse de la performance et la budgétisation, avec des bases en comptabilité, audit et normes IFRS acquises lors d’un stage en cabinet d’expertise comptable.
+
 ## 1. Introduction
 Le développement des villes intelligentes repose sur la capacité à anticiper la congestion urbaine. La prédiction du trafic permet d’optimiser les déplacements, d’améliorer la qualité de vie et de réduire l’empreinte écologique.
 
