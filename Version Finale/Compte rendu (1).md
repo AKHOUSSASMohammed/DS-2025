@@ -1,5 +1,7 @@
 # Transport et Smart-Cities | Prédiction de la Densité du Trafic Urbain
 
+![Image](https://raw.githubusercontent.com/AKHOUSSASMohammed/DS-2025/4cf334f2a4952eea59150946e5327983ef082b0f/Version%20Finale/IMG-20250509-WA0026.jpg)
+
 ## 1. Introduction
 Le développement des villes intelligentes repose sur la capacité à anticiper la congestion urbaine. La prédiction du trafic permet d’optimiser les déplacements, d’améliorer la qualité de vie et de réduire l’empreinte écologique.
 
